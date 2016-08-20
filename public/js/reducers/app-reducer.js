@@ -19,7 +19,7 @@ export default function (state = {todos: []}, action) {
                 todos: [
                     ...state.todos
                 ]
-            }
+            };
         case 'DELETE':
             let index = state.todos.indexOf(state.todos.find(t=>t.id===action.index));
             state.todos.splice(index,1);
@@ -27,7 +27,7 @@ export default function (state = {todos: []}, action) {
                 todos:[
                     ...state.todos
                 ]
-            }
+            };
 
     }
     return state;

@@ -11,8 +11,8 @@ const TodoList = React.createClass({
     render: function () {
         const todo = this.props.todos.map((todo, index)=> {
             return <div key={index}>
-                <input type="checkbox" onClick={this.changeState.bind(this, index)}/>
-                {todo.text}
+                <input type="checkbox" checked={todo.isDone} onClick={this.changeState.bind(this, index)}/>
+                <span style={{"textDecoration": todo.isDone ? "line-through" : ""}}>{todo.text}</span>
                 <button onClick={this.onDelete.bind(this, todo.id)}>X</button>
             </div>
         });
