@@ -11,7 +11,7 @@ const TodoList = React.createClass({
     render: function () {
         const todo = this.props.todos.map((todo, index)=> {
             return <div key={index}>
-                <input type="checkbox" checked={todo.isDone} onClick={this.changeState.bind(this, index)}/>
+                <input type="checkbox" checked={todo.isDone} onClick={this.changeState.bind(this, todo.id)}/>
                 <span style={{"textDecoration": todo.isDone ? "line-through" : ""}}>{todo.text}</span>
                 <button onClick={this.onDelete.bind(this, todo.id)}>X</button>
             </div>
@@ -24,7 +24,19 @@ const TodoList = React.createClass({
 
 
 function mapStateToProps(state) {
-    return {todos: state.todos}
+    if(state.filterName === 'ALL'){
+        return {todos: state.todos}
+    } else if(state.filterName === 'ACTIVE'){
+        const todos = state.todos.filter(todo=>{
+            return !todo.isDone
+        })
+        return {todos:todos}
+    } else {
+        const todos = state.todos.filter(todo=>{
+            return todo.isDone
+        })
+        return {todos:todos}
+    }
 }
 function mapDispatchToProps(dispatch) {
     return {
