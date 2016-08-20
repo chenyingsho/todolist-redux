@@ -1,10 +1,24 @@
 import React from 'react'
-export  default React.createClass({
+import {connect} from 'react-redux'
+const Add = React.createClass({
+    add(){
+        this.props.onAdd(this.refs.input.value)
+    },
     render: function () {
         return <div>
             <p>Todos</p>
             <input type="text" ref="input"/>
-            <button>add</button>
+            <button onClick={this.add}>add</button>
         </div>;
     }
 });
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onAdd: (text)=> {
+          dispatch({type:"ADD",text});
+        }
+    }
+}
+
+export default connect(()=>{return {}},mapDispatchToProps)(Add);

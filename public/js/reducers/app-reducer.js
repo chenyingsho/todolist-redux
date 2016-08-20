@@ -1,3 +1,15 @@
-export default function (state=3 ,action) {
+export default function (state={todos:[]},action) {
+    switch(action.type){
+        case "ADD":
+            return {
+                todos:[
+                    ...state.todos,
+                    {
+                        text:action.text,
+                        isDone:false
+                    }
+                ]
+            };
+    }
     return state;
 }
